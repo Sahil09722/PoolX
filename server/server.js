@@ -3,18 +3,20 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import rideRoutes from "./routes/rideRoutes.js";
+
 
 dotenv.config();
 const app = express();
 
-
+// Database
+connectDB();
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/rides", rideRoutes);
 
-// Database
-connectDB();
 
 app.get("/", (req, res) => {
   res.send("Carpooling API running...");
